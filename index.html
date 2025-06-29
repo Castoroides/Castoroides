@@ -8,22 +8,21 @@
   <title>ナグシン2025夏</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  
-  <link rel="stylesheet" href="fireworks.css">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
   
   
-  
-</head>
+  </head>
 
 <body>
 
     <style>
         @charset “utf-8”;
 
-        body {background-color: #000000}
+        body {background-color: rgb(126, 214, 255)}
+        body {background-color: rgb(11, 22, 114)}
 
         /* h1 */
         h1 {
@@ -71,10 +70,10 @@
         }
     </style>
 	<canvas>not work...</canvas>
-	<h1>fire works*</h1>
+	<h1>ナグシンありがとう2025夏</h1>
 	
 	<div style="text-align: center;">
-		<a href="#" class="border_slide_btn" onclick="location.href='../index.html'">戻る</a>
+		<a href="#" class="border_slide_btn" onclick="location.href='https://x.com/yukewai'">Xアカウント</a>
 	</div>
 
 
@@ -114,12 +113,13 @@ const Y_AXIS = 1;
     
     // 背景色を作る
     for (let i = 0; i < 6; i++){ 
-    	next_col_list.push(0)//parseInt(random(100,255)));
+        next_col_list.push(0)//parseInt(random(100,255)));
     }
     now_col1 = color(next_col_list[0], next_col_list[1], next_col_list[2]);
     now_col2 = color(next_col_list[4], next_col_list[4], next_col_list[5]);
-    c_idx_1 = parseInt(random(0, 3));
-	c_idx_2 = parseInt(random(3, 6));
+    
+    //c_idx_1 = parseInt(random(0, 3));
+	//c_idx_2 = parseInt(random(3, 6));
   }
 
   // draw：ページが読みこまれた際に実行される、1フレーム（1/60秒）ごとに実行される関数
@@ -127,7 +127,7 @@ const Y_AXIS = 1;
     
     // ----------- 補間したいよ～ -------------
     // 背景の移り変わり
-    if (0 === frameCount % 600) {
+    /*if (0 === frameCount % 600) {
 	     // 10ごとに明暗
 	    let sum = 0
 	    for (let i = 0; i < 6; i++){
@@ -152,10 +152,14 @@ const Y_AXIS = 1;
 	 	next_col_list[c_idx_1] = Math.abs(next_col_list[c_idx_1] - 1);
 	 	next_col_list[c_idx_2] = Math.abs(next_col_list[c_idx_2] - 1);
 	 }
-	 
-	 
-	 now_col1 = color(next_col_list[0], next_col_list[1], next_col_list[2]);
-	 now_col2 = color(next_col_list[4], next_col_list[4], next_col_list[5]);
+
+     now_col1 = color(next_col_list[0], next_col_list[1], next_col_list[2]);
+	 now_col2 = color(next_col_list[4], next_col_lsist[4], next_col_list[5]);
+    
+	 */
+
+     now_col1 = color(0,0,0);//100, 193, 236
+	 now_col2 = color(11, 22, 114);
     
     // 背景色を設定（p5.jsライブラリのグラデーションつくる機能
     setGradient(0, 0, width, height, now_col1, now_col2, Y_AXIS);
@@ -467,8 +471,5 @@ const Y_AXIS = 1;
 // ----------- add -------------
 
 </script>
-
-
-
 
 </html>
