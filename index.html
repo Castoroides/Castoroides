@@ -121,8 +121,12 @@ const Y_AXIS = 1;
     }
     now_col1 = color(next_col_list[0], next_col_list[1], next_col_list[2]);
     now_col2 = color(next_col_list[4], next_col_list[4], next_col_list[5]);
+
+	// 背景色の設定
+	now_col1 = color(0,0,0);//100, 193, 236
+	now_col2 = color(11, 22, 114);
     
-    //c_idx_1 = parseInt(random(0, 3));
+    	//c_idx_1 = parseInt(random(0, 3));
 	//c_idx_2 = parseInt(random(3, 6));
   }
 
@@ -162,18 +166,6 @@ const Y_AXIS = 1;
     
 	 */
 
-	  // 背景色の設定
-	now_col1 = color(0,0,0);//100, 193, 236
-	now_col2 = color(11, 22, 114);
-	
-	// 色を選択したら
-	const button = document.getElementById('color_button');
-	button.addEventListener('click', () => {
-		let element = document.getElementById('bgcolor');
-		console.log(element.value);
-		now_col1 = color(0,0,0);//100, 193, 236
-		now_col2 = element.value;
-	});
     
     // 背景色を設定（p5.jsライブラリのグラデーションつくる機能
     setGradient(0, 0, width, height, now_col1, now_col2, Y_AXIS);
@@ -481,6 +473,15 @@ const Y_AXIS = 1;
       rect(s[0], s[1], s[2], s[2]);
     }
   }
+
+	// 色を選択したら
+	const button = document.getElementById('color_button');
+	button.addEventListener('click', () => {
+		let element = document.getElementById('bgcolor');
+		console.log(element.value);
+		now_col1 = color(0,0,0);//100, 193, 236
+		now_col2 = element.value;
+	});
 
 // ----------- add -------------
 
