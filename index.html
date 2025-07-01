@@ -86,8 +86,17 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
 <script>
+
+// 色を選択したら
+const button = document.getElementById('color_button');
+button.addEventListener('click', () => {
+	let element = document.getElementById('bgcolor');
+	console.log(element.value);
+	now_col1 = color(0,0,0);//100, 193, 236
+	now_col2 = element.value;
+});
 	
-const Y_AXIS = 1;
+  const Y_AXIS = 1;
   const X_AXIS = 2;
   let canvas;
   let fireworks = [];
@@ -474,14 +483,6 @@ const Y_AXIS = 1;
     }
   }
 
-	// 色を選択したら
-	const button = document.getElementById('color_button');
-	button.addEventListener('click', () => {
-		let element = document.getElementById('bgcolor');
-		console.log(element.value);
-		now_col1 = color(0,0,0);//100, 193, 236
-		now_col2 = element.value;
-	});
 
 // ----------- add -------------
 
