@@ -12,63 +12,63 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
-  
-  
-  </head>
+</head>
 
 <body>
 
-    <style>
-        @charset “utf-8”;
+  <style>
+      @charset “utf-8”;
 
-        body {background-color: rgb(126, 214, 255)}
-        body {background-color: rgb(11, 22, 114)}
+      body {background-color: rgb(126, 214, 255)}
+      body {background-color: rgb(11, 22, 114)}
 
-        /* h1 */
-        h1 {
-            text-align: center;
-            color: rgb(255, 255, 255);
-            font-family: 'DotGothic16', sans-serif;
-            font-size: 5vw;
-        }
-        /* h2 */
-        h2 {
-            color: rgb(255, 255, 255);
-            font-family: 'DotGothic16', sans-serif;
-            font-size: 5vw;
-            text-align: center;
-        }
+      /* h1 */
+      h1 {
+          text-align: center;
+          color: rgb(255, 255, 255);
+          font-family: 'DotGothic16', sans-serif;
+          font-size: 5vw;
+      }
+      /* h2 */
+      h2 {
+          color: rgb(255, 255, 255);
+          font-family: 'DotGothic16', sans-serif;
+          font-size: 5vw;
+          text-align: center;
+      }
 
-        .border_slide_btn {
-        position: relative;
-        display: inline-block;
-            color: rgb(255, 255, 255);
-            font-family: 'DotGothic16', sans-serif;
-            font-size: 3vw;
-            text-align: center;
-            text-decoration: none;
-        }
-        .border_slide_btn:hover {
-        cursor: pointer;
-        text-decoration: none;
-        }
-        .border_slide_btn::after {
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        content: '';
-        width: 100%;
-        height: 2px;
-        background: #FFFFFF;
-        transform: scale(0, 1);
-        transform-origin: right top;
-        transition: transform .3s;
-        }
-        .border_slide_btn:hover::after {
-        transform-origin: left top;
-        transform: scale(1, 1);
-        }
-    </style>
+      .border_slide_btn {
+      position: relative;
+      display: inline-block;
+          color: rgb(255, 255, 255);
+          font-family: 'DotGothic16', sans-serif;
+          font-size: 3vw;
+          text-align: center;
+          text-decoration: none;
+      }
+      .border_slide_btn:hover {
+          cursor: pointer;
+          text-decoration: none;
+      }
+      .border_slide_btn::after {
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          content: '';
+          width: 100%;
+          height: 2px;
+          background: #FFFFFF;
+          transform: scale(0, 1);
+          transform-origin: right top;
+          transition: transform .3s;
+      }
+      .border_slide_btn:hover::after {
+          transform-origin: left top;
+          transform: scale(1, 1);
+      }
+  </style>
+
+
 	<canvas>not work...</canvas>
 
 	<!--<div>
@@ -87,14 +87,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
 <script>
 
-// 色を選択したら（今回はナシで）
-/*const button = document.getElementById('color_button');
-button.addEventListener('click', () => {
-	let element = document.getElementById('bgcolor');
-	console.log(element.value);
-	now_col1 = color(0,0,0);//100, 193, 236
-	now_col2 = element.value;
-});*/
+  // 色を選択したら（今回はナシで）
+  /*const button = document.getElementById('color_button');
+  button.addEventListener('click', () => {
+    let element = document.getElementById('bgcolor');
+    console.log(element.value);
+    now_col1 = color(0,0,0);//100, 193, 236
+    now_col2 = element.value;
+  });*/
 	
   const Y_AXIS = 1;
   const X_AXIS = 2;
@@ -125,22 +125,22 @@ button.addEventListener('click', () => {
     this.preStar();
     
     // 背景色を作る
-    for (let i = 0; i < 6; i++){ 
+    for (let i = 0; i < 6; i++){
         next_col_list.push(0)//parseInt(random(100,255)));
     }
     now_col1 = color(next_col_list[0], next_col_list[1], next_col_list[2]);
     now_col2 = color(next_col_list[4], next_col_list[4], next_col_list[5]);
 
-	// 背景色の設定
-	now_col1 = color(0,0,0);//100, 193, 236
-	now_col2 = color(11, 22, 114);
+    // 背景色の設定
+    now_col1 = color(0,0,0);//100, 193, 236
+    now_col2 = color(11, 22, 114);
     
     //c_idx_1 = parseInt(random(0, 3));
-	//c_idx_2 = parseInt(random(3, 6));
+	  //c_idx_2 = parseInt(random(3, 6));
   }
 
-    // draw：ページが読みこまれた際に実行される、1フレーム（1/60秒）ごとに実行される関数
-    function draw() {
+  // draw：ページが読みこまれた際に実行される、1フレーム（1/60秒）ごとに実行される関数
+  function draw() {
     
     // 背景の移り変わり
     /*if (0 === frameCount % 600) {
@@ -156,23 +156,23 @@ button.addEventListener('click', () => {
 	    else r_switch = 0;
 	    
 	    c_idx_1 = parseInt(random(0, 3));
-	 	c_idx_2 = parseInt(random(3, 6));
-	 	//console.log(c_idx_1, c_idx_2)
-	 }
-	 
-	 if (r_switch == 0){
-		 next_col_list[c_idx_1] = Math.abs(next_col_list[c_idx_1] + 1);
-		 next_col_list[c_idx_2] = Math.abs(next_col_list[c_idx_2] + 1);
-	 }
-	 else{
-	 	next_col_list[c_idx_1] = Math.abs(next_col_list[c_idx_1] - 1);
-	 	next_col_list[c_idx_2] = Math.abs(next_col_list[c_idx_2] - 1);
-	 }
-
-     now_col1 = color(next_col_list[0], next_col_list[1], next_col_list[2]);
-	 now_col2 = color(next_col_list[4], next_col_lsist[4], next_col_list[5]);
+      c_idx_2 = parseInt(random(3, 6));
+      //console.log(c_idx_1, c_idx_2)
+    }
     
-	 */
+    if (r_switch == 0){
+      next_col_list[c_idx_1] = Math.abs(next_col_list[c_idx_1] + 1);
+      next_col_list[c_idx_2] = Math.abs(next_col_list[c_idx_2] + 1);
+    }
+    else{
+      next_col_list[c_idx_1] = Math.abs(next_col_list[c_idx_1] - 1);
+      next_col_list[c_idx_2] = Math.abs(next_col_list[c_idx_2] - 1);
+    }
+
+    now_col1 = color(next_col_list[0], next_col_list[1], next_col_list[2]);
+	  now_col2 = color(next_col_list[4], next_col_lsist[4], next_col_list[5]);
+    
+	  */
 
     
     // 背景色を設定（p5.jsライブラリのグラデーションつくる機能
@@ -205,14 +205,13 @@ button.addEventListener('click', () => {
   }
 
   // クリックイベントで起動
-    $(function () {
-        //ウインドウ内クリックでの処理
-        document.body.onclick = function ( event ) {
-            alert("document.body.onclick...event");
+  function buttonClick(){
+    document.body.onclick = function ( event ) {
+            alert("fire!");
       // 打ち上げアニメーションを呼び出す
       fw.fire();
     }
-    });
+  }
 
 // ----------- ここからクラス -------------
 
