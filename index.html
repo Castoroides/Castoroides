@@ -87,14 +87,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
 <script>
 
-// 色を選択したら
-const button = document.getElementById('color_button');
+// 色を選択したら（今回はナシで）
+/*const button = document.getElementById('color_button');
 button.addEventListener('click', () => {
 	let element = document.getElementById('bgcolor');
 	console.log(element.value);
 	now_col1 = color(0,0,0);//100, 193, 236
 	now_col2 = element.value;
-});
+});*/
 	
   const Y_AXIS = 1;
   const X_AXIS = 2;
@@ -135,14 +135,13 @@ button.addEventListener('click', () => {
 	now_col1 = color(0,0,0);//100, 193, 236
 	now_col2 = color(11, 22, 114);
     
-    	//c_idx_1 = parseInt(random(0, 3));
+    //c_idx_1 = parseInt(random(0, 3));
 	//c_idx_2 = parseInt(random(3, 6));
   }
 
-  // draw：ページが読みこまれた際に実行される、1フレーム（1/60秒）ごとに実行される関数
-  function draw() {
+    // draw：ページが読みこまれた際に実行される、1フレーム（1/60秒）ごとに実行される関数
+    function draw() {
     
-    // ----------- 補間したいよ～ -------------
     // 背景の移り変わり
     /*if (0 === frameCount % 600) {
 	     // 10ごとに明暗
@@ -170,7 +169,7 @@ button.addEventListener('click', () => {
 	 	next_col_list[c_idx_2] = Math.abs(next_col_list[c_idx_2] - 1);
 	 }
 
-     	now_col1 = color(next_col_list[0], next_col_list[1], next_col_list[2]);
+     now_col1 = color(next_col_list[0], next_col_list[1], next_col_list[2]);
 	 now_col2 = color(next_col_list[4], next_col_lsist[4], next_col_list[5]);
     
 	 */
@@ -185,7 +184,7 @@ button.addEventListener('click', () => {
 
     // 花火を打ち上げる間隔を調整
     if (width/height < 1){
-    	interval = 60
+    	interval = 120
     }
     if (0 === frameCount % interval) {// === 厳密等価演算子：文字列が数値に変換されない、frameCount：表示されてきたフレーム数
       // 打ち上がるスピード
@@ -204,6 +203,16 @@ button.addEventListener('click', () => {
       fw.fire();
     }
   }
+
+  // クリックイベントで起動
+    $(function () {
+        //ウインドウ内クリックでの処理
+        document.body.onclick = function ( event ) {
+            alert("document.body.onclick...event");
+      // 打ち上げアニメーションを呼び出す
+      fw.fire();
+    }
+    });
 
 // ----------- ここからクラス -------------
 
@@ -228,7 +237,7 @@ button.addEventListener('click', () => {
       this.w = random(5, 10);// p5.jsの機能
 
       // 打ち上がる高さ
-      this.maxHeight = random(height / 4, height / 9);
+      this.maxHeight = random(height / 2, height / 9);
       this.fireHeight = height - this.maxHeight;
 
       // 重力
