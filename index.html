@@ -205,14 +205,23 @@
   }
 
   // クリックイベントで起動
-  function buttonClick(){
-    document.body.onclick = function ( event ) {
-            alert("fire!");
+  document.addEventListener('click', function(event) {
+    console.log("fire!");
+
+    // 打ち上げアニメーションを呼び出す
+    let speed = random(10, 30);
+    fireworks.push(new FireWork(random(width), height, 0, speed, 0.98));
+
+    for (let fw of fireworks) {
+      if (2 === fw.getType || 30000 < fw.getFrame) {
+        fireworks = fireworks.filter((n) => n !== fw);
+        continue;
+      }
       // 打ち上げアニメーションを呼び出す
       fw.fire();
     }
-  }
-
+  });
+  
 // ----------- ここからクラス -------------
 
   class FireWork {
