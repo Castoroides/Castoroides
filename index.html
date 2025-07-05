@@ -22,14 +22,13 @@
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body id="body">
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TPKXSNK3"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
   <style>
-      @charset “utf-8”;
 
       body {background-color: rgb(126, 214, 255)}
       body {background-color: rgb(11, 22, 114)}
@@ -87,7 +86,7 @@
 	<p><label><span style="color:#ffffff;">色を選択</span> <input id="bgcolor" name="favorite_color" type="color" /> </label><button id="color_button">決定</button></p>
 	</div>-->
 	
-	<h1 id="hl_1">ナグシンありがとう2025夏</h1>
+	<h1>ナグシンありがとう2025夏</h1>
 	
 	<div style="text-align: center;">
 		<a href="#" class="border_slide_btn" onclick="location.href='https://x.com/yukewai'">Xアカウント</a>
@@ -120,6 +119,7 @@
   let c_idx_1, c_idx_2;
   let interval = 20
   let r_switch = 0
+  let client_X, client_y;
 
   // ウィンドウサイズ変更時
   function windowResized() {
@@ -219,12 +219,7 @@
   // クリックイベントで起動
   document.addEventListener('click', function(event) {
     console.log("fire!");
-
-    // 文字サイズを大きく（workアピ）
-    let hl = document.getElementById("hl_1");
-    hl.style.fontSize = "4.5vw";
-
-
+    /*
     // 打ち上げアニメーションを呼び出す
     let speed = random(10, 30);
     fireworks.push(new FireWork(random(width), height, 0, speed, 0.98));
@@ -234,10 +229,52 @@
         fireworks = fireworks.filter((n) => n !== fw);
         continue;
       }
-      // 打ち上げアニメーションを呼び出す
       fw.fire();
     }
+      */
   });
+
+  window.addEventListener('load', function(){
+      document.getElementById("body").addEventListener('touchstart', logTouchStart); // タッチ開始
+      document.getElementById("body").addEventListener('touchend', logTouchEnd); // タッチ終了
+  });
+
+  function logTouchStart() {
+    if( event.changedTouches[0] ) {
+        // ブラウザタップ位置
+        console.log("tap_s");
+      }
+  }
+
+  function logTouchEnd() {
+    // ブラウザタップ位置
+    client_X = event.changedTouches[0].clientX;
+    client_Y = event.changedTouches[0].clientY;
+
+    // タッチ時の星の描画
+    tap_star = [];
+    for (let i = 0; i < 10; i++) {
+      tap_star.push([random(client_X), random(client_Y), random(100, 400)]);
+    }
+    for (let ts of tap_star) {
+      let c = color(random(150, 255), random(150, 255), 255);
+      c.setAlpha(random(150, 200));
+      fill(c);
+      rect(ts[0], ts[1], ts[2], ts[2]);
+      console.log(ts[0], ts[1], ts[2], ts[2]);
+      // 打ち上げアニメーションを呼び出す
+      let speed = random(10, 30);
+      fireworks.push(new FireWork(random(width), height, 0, speed, 0.98));
+
+      for (let fw of fireworks) {
+        if (2 === fw.getType || 30000 < fw.getFrame) {
+          fireworks = fireworks.filter((n) => n !== fw);
+          continue;
+        }
+        fw.fire();
+      }
+    }
+  }
   
 // ----------- ここからクラス -------------
 
@@ -516,7 +553,6 @@
       rect(s[0], s[1], s[2], s[2]);
     }
   }
-
 
 // ----------- add -------------
 
