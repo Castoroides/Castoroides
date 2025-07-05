@@ -262,17 +262,20 @@
       fill(c);
       rect(ts[0], ts[1], ts[2], ts[2]);
       console.log(ts[0], ts[1], ts[2], ts[2]);
-      // 打ち上げアニメーションを呼び出す
-      let speed = random(10, 30);
-      fireworks.push(new FireWork(random(width), height, 0, speed, 0.98));
+    }
 
-      for (let fw of fireworks) {
-        if (2 === fw.getType || 30000 < fw.getFrame) {
-          fireworks = fireworks.filter((n) => n !== fw);
-          continue;
-        }
-        fw.fire();
+    // 打ち上げアニメーションを呼び出す
+    let cnt_fw = random(1, 3);
+    for (let j=0; j < cnt_fw; j++) {
+    let speed = random(10, 30);
+    fireworks.push(new FireWork(random(width), height, 0, speed, 0.98));
+    for (let fw of fireworks) {
+      if (2 === fw.getType || 30000 < fw.getFrame) {
+        fireworks = fireworks.filter((n) => n !== fw);
+        continue;
       }
+      fw.fire();
+    }
     }
   }
   
