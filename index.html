@@ -30,8 +30,8 @@
 
   <style>
 
-      body {background-color: rgb(126, 214, 255)}
-      body {background-color: rgb(11, 22, 114)}
+      /*body {background-color: rgb(126, 214, 255)}
+      body {background-color: rgb(11, 22, 114)}*/
 
       /* h1 */
       h1 {
@@ -40,14 +40,6 @@
           font-family: 'DotGothic16', sans-serif;
           font-size: 5vw;
       }
-      /* h2 */
-      h2 {
-          color: rgb(255, 255, 255);
-          font-family: 'DotGothic16', sans-serif;
-          font-size: 5vw;
-          text-align: center;
-      }
-
       .border_slide_btn {
       position: relative;
       display: inline-block;
@@ -77,6 +69,14 @@
           transform-origin: left top;
           transform: scale(1, 1);
       }
+      @media (min-width: 768px){
+        h1 {
+          font-size: 2vw;
+        }
+        .border_slide_btn {
+          font-size: 1vw;
+        }
+      }
   </style>
 
 
@@ -89,7 +89,7 @@
 	<h1>ナグシンありがとう2025夏</h1>
 	
 	<div style="text-align: center;">
-		<a href="#" class="border_slide_btn" onclick="location.href='https://x.com/yukewai'">Xアカウント</a>
+		<a href="#" class="border_slide_btn" onclick="location.href='https://x.com/yukewai'">Ｘアカウント</a>
 	</div>
 
 
@@ -216,24 +216,14 @@
     }
   }
 
+  /*
   // クリックイベントで起動
   document.addEventListener('click', function(event) {
-    console.log("fire!");
-    /*
-    // 打ち上げアニメーションを呼び出す
-    let speed = random(10, 30);
-    fireworks.push(new FireWork(random(width), height, 0, speed, 0.98));
-
-    for (let fw of fireworks) {
-      if (2 === fw.getType || 30000 < fw.getFrame) {
-        fireworks = fireworks.filter((n) => n !== fw);
-        continue;
-      }
-      fw.fire();
-    }
-      */
+  console.log("fire!");
   });
+  */
 
+  // ページ読み込み時に実行
   window.addEventListener('load', function(){
       document.getElementById("body").addEventListener('touchstart', logTouchStart); // タッチ開始
       document.getElementById("body").addEventListener('touchend', logTouchEnd); // タッチ終了
@@ -242,7 +232,7 @@
   function logTouchStart() {
     if( event.changedTouches[0] ) {
         // ブラウザタップ位置
-        console.log("tap_s");
+        console.log("tap");
       }
   }
 
