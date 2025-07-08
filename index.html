@@ -66,13 +66,13 @@
           width: 100%;
           height: 2px;
           background: #FFFFFF;
-          transform: scale(0, 1);
-          transform-origin: right top;
+          transform: scale(1, 1);
+          transform-origin: left top;
           transition: transform .3s;
       }
       .border_slide_btn:hover::after {
-          transform-origin: left top;
-          transform: scale(1, 1);
+          transform-origin: right top;
+          transform: scale(0, 1);
       }
       @media (min-width: 768px){
         h1 {
@@ -103,8 +103,8 @@
 		<a class="border_slide_btn" onclick="location.href='https://www.pixiv.net/users/17100359'">Ｐｉｘｉｖアカウント</a>
 	</div>
 
-	<div style="position:fixed; right:10px; top:10px;">
-		<a class="border_slide_btn" onclick="location.href='https://qiita.com/iNaoki04/items/5d420440cf3d89f54f82'">→This site is created with reference to the links.</a>
+	<div style="position:fixed; right:10px; bottom:30px;">
+		<a class="border_slide_btn" onclick="location.href='https://qiita.com/iNaoki04/items/5d420440cf3d89f54f82'">This site is created with reference to the links.</a>
 	</div>
 
 </body>
