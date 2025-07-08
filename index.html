@@ -123,6 +123,7 @@
   let interval = 20
   let r_switch = 0
   let client_X, client_y;
+  let effects = [];
 
   // ウィンドウサイズ変更時
   function windowResized() {
@@ -236,27 +237,10 @@
     if( event.changedTouches[0] ) {
         // ブラウザタップ位置
         console.log("tap");
-      }
+    }
   }
 
   function logTouchEnd() {
-    // ブラウザタップ位置
-    client_X = event.changedTouches[0].clientX;
-    client_Y = event.changedTouches[0].clientY;
-
-    // タッチ時の星の描画
-    tap_star = [];
-    for (let i = 0; i < 10; i++) {
-      tap_star.push([random(client_X), random(client_Y), random(100, 400)]);
-    }
-    for (let ts of tap_star) {
-      let c = color(random(150, 255), random(150, 255), 255);
-      c.setAlpha(random(150, 200));
-      fill(c);
-      rect(ts[0], ts[1], ts[2], ts[2]);
-      console.log(ts[0], ts[1], ts[2], ts[2]);
-    }
-
     // 打ち上げアニメーションを呼び出す
     let cnt_fw = random(1, 3);
     for (let j=0; j < cnt_fw; j++) {
@@ -269,6 +253,25 @@
       }
       fw.fire();
     }
+    }
+
+    // ブラウザタップ位置
+    client_X = event.changedTouches[0].clientX;
+    client_Y = event.changedTouches[0].clientY;
+
+    // タッチエフェクト
+    let speed = random(10, 30); // 弾けるスピード
+    effects.push(new Effect(client_X, client_Y, speed));
+
+    for (let ef of effects) {
+      // 打ち切った花火を処理対象から外す（配列から削除する）
+      if (2 === ef.getType || 10000 < ef.getFrame) {
+        effects = effects.filter((n) => n !== ef);
+        continue;
+      }
+
+      // 打ち上げアニメーションを呼び出す
+      ef.pop();
     }
   }
   
@@ -550,7 +553,180 @@
     }
   }
 
-// ----------- add -------------
+  // ----------- ここからタッチエフェクト -------------
+
+  class Effect {
+    // 初期設定
+    constructor(x, y, v) {
+      // フレームカウンター
+      this.frame = 0;
+      this.type = 0;
+      this.next = 0;
+      // エフェクトの色
+      this.r = random(155) + 80;
+      this.g = random(155) + 80;
+      this.b = random(155) + 80;
+      this.a = 255;
+
+      // タッチ座標
+      this.x = x;
+      this.y = y;
+
+      // 玉の大きさ
+      this.w = random(2, 5);// p5.jsの機能
+
+      // 速度
+      this.v = v;
+
+      // 残像表示用配列
+      this.afterImages = [];
+      // 弾ける用配列
+      this.pops = [];
+      // 爆発の大きさ
+      this.large = random(1, 15);
+      // 爆発の玉の数
+      this.ball = random(20, 100);
+      // 爆発から消えるまでの長さ
+      this.exend = random(20, 40);
+    }
+    get getFrame() {
+      return this.frame;
+    }
+    get getType() {
+      return this.type;
+    }
+
+    // 処理コントロール
+    pop() {
+      // 弾ける大きさ
+      for (let i = 0; i < this.ball; i++) {
+        // 角度
+        let r = random(0, 360);
+        // 玉の内側を作る（バラバラ）
+        let s = random(0.1, 0.9);
+        let v = Math.cos((r * Math.PI) / 180) * s * this.large;
+        this.pops.push(new Effect(this.x, this.y, v));
+        // 輪郭を作る（丸くなるようにする）
+        let cr = random(0, 360);
+        let cs = random(0.9, 1);
+        let cv = Math.cos((cr * Math.PI) / 180) * cs * this.large;
+        this.pops.push(new Effect(this.x, this.y, cv));
+      }
+      this.a = 255;
+      this.type = 1;
+
+      for (let p of this.pops) {
+        p.frame++;  
+
+        // 弾け終わったpopを配列から除去する
+        if (2 === p.getType) {
+          this.pop = this.pop.filter((n) => n !== p);
+          continue;
+        }
+
+        // 残像を描画
+        if (0 === Math.round(random(0, 32))) {
+          p.afterImages.push(new E_Afterimage(this.r, this.g, this.b, p.x, p.y, p.w, p.a));
+        }
+
+        for (let ai of p.afterImages) {
+          if (ai.getAlpha < 0) {
+            p.afterImages = p.afterImages.filter((n) => n !== ai);
+            continue;
+          }
+          ai.exImage();
+        }
+
+        // 弾けさせる
+        this.update(p.x, p.y, p.w, p.a);
+        p.x += p.v;
+        p.y += p.v;
+        p.vx = p.v * p.v;
+        p.vy = p.v * p.v;
+        p.vy = p.v + p.v / 30;
+        if (this.exend < p.frame) {
+          p.w -= 0.1;
+          p.a = p.a - 4;
+          if (p.a < 0 && 0 === p.afterImages.length) {
+            p.type = 2;
+          }
+        }
+      }
+    }
+
+    // エフェクトの描画
+    update(x, y, w, a) {
+      this.frame++;
+      if (0 < this.a) {
+        let c = color(this.r, this.g, this.b);
+        c.setAlpha(a);
+        fill(c);
+        rect(x, y, w, w);
+      }
+    }
+  }
+  // 残像処理用クラス
+  class E_Afterimage {
+    constructor(r, g, b, x, y, w, a) {
+      this.frame = 0;
+      this.r = r;
+      this.g = g;
+      this.b = b;
+      this.x = x;
+      this.y = y;
+      this.w = w;
+      this.a = a;
+      this.v = random(-0.24, 0.24);
+    }
+
+    get getAlpha() {
+      return this.a;
+    }
+
+    // 爆発用
+    exImage() {
+      if (0 < this.a) {
+        this.update(this.r, this.g, this.b, this.x, this.y, this.w, this.a);
+        this.r += 2.5;
+        this.g += 2.5;
+        this.b += 2.5;
+        this.x = this.x + this.v;
+        this.y = this.y + this.v;
+        if (0 < this.w) {
+          this.w = this.w - this.v;
+        }
+        this.a = this.a - 1.5;
+      }
+    }
+    update(r, g, b, x, y, w, a) {
+      this.frame++;
+      let c = color(r, g, b);
+      c.setAlpha(a);
+      fill(c);
+      rect(x, y, w, w);
+      
+    }
+  }
+
+  /*
+  // タッチエフェクト
+  function touchEffects(client_X, client_Y) {
+    // 星を描く
+    tap_star = [];
+    for (let i = 0; i < 10; i++) {
+      tap_star.push([random(client_X), random(client_Y), random(100, 400)]);
+    }
+    for (let ts of tap_star) {
+      let c = color(random(150, 255), random(150, 255), 255);
+      c.setAlpha(random(150, 200));
+      fill(c);
+      rect(ts[0], ts[1], ts[2], ts[2]);
+      console.log(ts[0], ts[1], ts[2], ts[2]);
+    }
+  }
+  */
+
+  // ----------- タッチエフェクト終わり -------------
 
 </script>
 
