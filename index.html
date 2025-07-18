@@ -76,30 +76,31 @@
       }
         /* フォーム全体のスタイル */
         form {
-            background-color: white;
             padding: 20px;
             width: 90%;
             max-width: 400px;
             margin: auto;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: left;
+            color: #ffffff;
         }
         /* ラベルのスタイル */
         label {
             display: block;
             margin-top: 10px;
             font-weight: bold;
-            color: #555;
+            color: #ffffff;
+            font-family: 'DotGothic16', sans-serif;
+            font-size: 3vw;
         }
         /* 入力欄のスタイル */
         input, textarea {
             width: 100%; /* box-sizingが適用されるので、paddingやborder込みで100%に収まる */
             padding: 10px;
             margin-top: 5px;
-            border: 1px solid #ccc;
+            border: 2px solid #fff;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 3vw;
         }
         /* テキストエリアの高さを調整 */
         textarea {
@@ -108,8 +109,8 @@
         }
         /* 送信ボタンのスタイル */
         button {
-            background-color: #28a745;
-            color: white;
+            color: #ffffff;
+            color: #222;
             border: none;
             padding: 10px;
             width: 100%;
@@ -120,7 +121,8 @@
         }
         /* ホバー時のボタンスタイル */
         button:hover {
-            background-color: #218838;
+            color: #222;
+            color: #fff;
         }
       @media (min-width: 768px){
         h1 {
