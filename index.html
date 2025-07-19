@@ -20,6 +20,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+
+  <script>
+    const onClickSubmit = () => {
+        // 任意の処理をしてからsubmitする
+        document.qform.submit();
+        //$("#form").submit();
+    }
+</script>
+
 </head>
 
 <body id="body">
@@ -100,35 +109,37 @@
             margin-top: 5px;
             border: 2px solid #fff;
             border-radius: 5px;
-            font-size: 3vw;
+            font-size: 16px;
         }
         /* テキストエリアの高さを調整 */
         textarea {
+            font-family: 'DotGothic16', sans-serif;
             resize: vertical;
             height: 120px;
         }
         /* 送信ボタンのスタイル */
-        button {
+        .submitBtn {
+            font-family: 'DotGothic16', sans-serif;
             color: #ffffff;
-            color: #222;
-            border: none;
+            background-color: #222;
+            border: solid 1px #fff;
             padding: 10px;
             width: 100%;
-            margin-top: 10px;
+            margin: 10px;
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
         }
         /* ホバー時のボタンスタイル */
-        button:hover {
+        .submitBtn:hover {
             color: #222;
-            color: #fff;
+            background-color: #fff;
         }
       @media (min-width: 768px){
         h1 {
           font-size: 2vw;
         }
-	h2 {
+	      h2 {
           font-size: 1vw;
         }
         .border_slide_btn {
@@ -155,12 +166,14 @@
 	</div>
 
     <div style="text-align:center; margin-top:30px;">
-        <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeAh3PkdADlFIdCWVgCcHmDSSe239NOmleDR-4Vj3EsfSynGg/formResponse">
+        <form name="qform" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeAh3PkdADlFIdCWVgCcHmDSSe239NOmleDR-4Vj3EsfSynGg/formResponse">
         <label for="message">お問い合わせ内容:</label>
-        <textarea id="message" name="entry.1612645408" rows="5" required></textarea>
-        <button type="submit">送信</button>
+        <textarea id="message" placeholder="返信が必要な場合は連絡先を記載ください。" name="entry.1612645408" rows="5" method="post" target="hidden-iframe"></textarea>
+        <!--<button type="submit">送信</button>-->
+        <input class="submitBtn" type="button" value="送信" onclick="onClickSubmit()">
     </form>
 	</div>
+  <iframe name="hidden-iframe" style="display: none;"></iframe>
     
 	<div style="position:fixed; right:10px; bottom:30px;">
 		<a class="border_slide_btn" onclick="location.href='https://qiita.com/iNaoki04/items/5d420440cf3d89f54f82'">This site is created with reference to the links.</a>
@@ -382,9 +395,9 @@
       this.explosions = [];
 
       // 消えてから爆発までの遅延時間
-      this.exDelay = random(10, 20);
+      this.exDelay = random(5, 20);
       // 爆発の大きさ
-      this.large = random(1, 15);
+      this.large = random(5, 20);
       // 爆発の玉の数
       this.ball = random(20, 100);
       // 爆発から消えるまでの長さ
@@ -643,7 +656,7 @@
       this.y = y;
 
       // 玉の大きさ
-      this.w = random(2, 5);// p5.jsの機能
+      this.w = random(3, 5);// p5.jsの機能
 
       // 速度
       this.v = v;
@@ -653,7 +666,7 @@
       // 弾ける用配列
       this.pops = [];
       // 爆発の大きさ
-      this.large = random(1, 15);
+      this.large = random(5, 15);
       // 爆発の玉の数
       this.ball = random(20, 100);
       // 爆発から消えるまでの長さ
