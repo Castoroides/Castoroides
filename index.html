@@ -20,15 +20,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
-
-  <script>
-    const onClickSubmit = () => {
-        // 任意の処理をしてからsubmitする
-        document.qform.submit();
-        //$("#form").submit();
-    }
-</script>
-
 </head>
 
 <body id="body">
@@ -86,7 +77,7 @@
         /* フォーム全体のスタイル */
         form {
             padding: 20px;
-            width: 100%;
+            width: 90%;
             max-width: 400px;
             margin: auto;
             border-radius: 10px;
@@ -104,7 +95,7 @@
         }
         /* 入力欄のスタイル */
         input, textarea {
-            width: 80%; /* box-sizingが適用されるので、paddingやborder込みで100%に収まる */
+            width: 100%; /* box-sizingが適用されるので、paddingやborder込みで100%に収まる */
             padding: 10px;
             margin-top: 5px;
             border: 2px solid #fff;
@@ -113,32 +104,31 @@
         }
         /* テキストエリアの高さを調整 */
         textarea {
-            font-family: 'DotGothic16', sans-serif;
             resize: vertical;
             height: 120px;
         }
         /* 送信ボタンのスタイル */
-        .submitBtn {
-            font-family: 'DotGothic16', sans-serif;
+        button {
             color: #ffffff;
-            background-color: #222;
-            border: solid 1px #fff;
+            color: #222;
+            border: none;
             padding: 10px;
-            width: 80%;
+            width: 100%;
+            margin-top: 10px;
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
         }
         /* ホバー時のボタンスタイル */
-        .submitBtn:hover {
+        button:hover {
             color: #222;
-            background-color: #fff;
+            color: #fff;
         }
       @media (min-width: 768px){
         h1 {
           font-size: 2vw;
         }
-	      h2 {
+	h2 {
           font-size: 1vw;
         }
         .border_slide_btn {
@@ -165,17 +155,15 @@
 	</div>
 
     <div style="text-align:center; margin-top:30px;">
-        <form name="qform" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeAh3PkdADlFIdCWVgCcHmDSSe239NOmleDR-4Vj3EsfSynGg/formResponse">
+        <form>
         <label for="message">お問い合わせ内容:</label>
-        <textarea id="message" placeholder="返信が必要な場合は連絡先を記載ください。" name="entry.1612645408" rows="5" method="post" target="hidden-iframe"></textarea>
-        <!--<button type="submit">送信</button>-->
-        <input class="submitBtn" type="button" value="送信" onclick="onClickSubmit()">
+        <textarea id="message" name="message" rows="5" required></textarea>
+        <button type="submit">送信</button>
     </form>
 	</div>
-  <iframe name="hidden-iframe" style="display: none;"></iframe>
     
 	<div style="position:fixed; right:10px; bottom:30px;">
-		<a class="border_slide_btn" onclick="location.href='https://qiita.com/iNaoki04/items/5d420440cf3d89f54f82'">This site is created with reference to the links.</a>
+		<a class="border_slide_btn" style="font-size:12px;" onclick="location.href='https://qiita.com/iNaoki04/items/5d420440cf3d89f54f82'">This site is created with reference to the links.</a>
 	</div>
 
 </body>
@@ -394,9 +382,9 @@
       this.explosions = [];
 
       // 消えてから爆発までの遅延時間
-      this.exDelay = random(5, 20);
+      this.exDelay = random(10, 20);
       // 爆発の大きさ
-      this.large = random(5, 20);
+      this.large = random(1, 15);
       // 爆発の玉の数
       this.ball = random(20, 100);
       // 爆発から消えるまでの長さ
@@ -655,7 +643,7 @@
       this.y = y;
 
       // 玉の大きさ
-      this.w = random(3, 5);// p5.jsの機能
+      this.w = random(2, 5);// p5.jsの機能
 
       // 速度
       this.v = v;
@@ -665,7 +653,7 @@
       // 弾ける用配列
       this.pops = [];
       // 爆発の大きさ
-      this.large = random(5, 15);
+      this.large = random(1, 15);
       // 爆発の玉の数
       this.ball = random(20, 100);
       // 爆発から消えるまでの長さ
