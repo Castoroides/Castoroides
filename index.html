@@ -116,7 +116,7 @@
             margin-top: 5px;
             border: 2px solid #fff;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 3vw;
         }
         /* テキストエリアの高さを調整 */
         textarea {
@@ -160,6 +160,101 @@
             font-size: 1vw;
         }
       }
+      /* --- 🍪注意喚起（AIに作ってもらった） --- */
+    :root{
+      --bg: rgba(22,24,27,0.95);
+      --text: #fff;
+      --accent: #08a0f7;
+      --muted: rgba(255,255,255,0.8);
+      --radius: 12px;
+      --padding: 12px 14px;
+      --shadow: 0 6px 22px rgba(0,0,0,0.35);
+    }
+
+    /* コンテナ（左下固定） */
+    .gtm-notice {
+      position: fixed;
+      left: 18px;
+      bottom: 18px;
+      max-width: 320px;
+      width: calc(100% - 36px);
+      background: linear-gradient(180deg, var(--bg), rgba(10,10,10,0.9));
+      color: var(--text);
+      padding: var(--padding);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      gap: 10px;
+      align-items: start;
+      /*font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;*/
+      font-family: 'DotGothic16', sans-serif;
+      transform: translateY(8px);
+      opacity: 0;
+      pointer-events: none; /* 一旦隠れ状態でクリックを無効 */
+      transition: transform 220ms cubic-bezier(.2,.9,.3,1), opacity 220ms ease;
+      z-index: 99999;
+    }
+
+    .gtm-notice.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* アイコン（丸） */
+    .gtm-notice__icon{
+      flex: 0 0 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      font-size:13px;
+      color: var(--muted);
+      padding:6px;
+    }
+
+    /* 本文 */
+    .gtm-notice__body{
+      flex:1 1 auto;
+      font-size:13px;
+      line-height:1.35;
+      color: var(--muted);
+    }
+
+    .gtm-notice__link{
+      font-size:12px;
+      text-decoration:none;
+      color: var(--accent);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 4px 6px;
+      border-radius: 8px;
+    }
+
+    /* 閉じるボタン（右上の×ではなく小さいボタン） */
+    .gtm-notice__close{
+      flex: 0 0 auto;
+      margin-left: 8px;
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size:18px;
+      line-height:1;
+      cursor:pointer;
+      padding:6px;
+      border-radius:8px;
+    }
+    .gtm-notice__close:focus{ outline: 2px solid rgba(8,160,247,0.18); }
+
+    /* 小さめのスクリーン向け */
+    @media (max-width:420px){
+      .gtm-notice{ left: 10px; bottom:10px; max-width: 100%; padding:10px; }
+      .gtm-notice__icon{ flex-basis:40px; height:40px; }
+    }
   </style>
 
 
@@ -169,14 +264,14 @@
 	<p><label><span style="color:#ffffff;">色を選択</span> <input id="bgcolor" name="favorite_color" type="color" /> </label><button id="color_button">決定</button></p>
 	</div>-->
 	
-	<h1>ナグシンに感謝しています</h1>
-	<h2 style="margin-top:20px;">ゆけわい</h2>
+	<h1> UKY（ゆけわい）</h1>
+	<h2 style="margin-top:20px;">25↑、skmt☁💭描いてます！</h2>
 
 	<div style="text-align:center;">
 		<a class="border_slide_btn" onclick="location.href='https://x.com/yukewai'">Ｘアカウント</a>
 	</div>
   	<div style="text-align:center; margin-top:3px;">
-		<a class="border_slide_btn" onclick="location.href='https://www.pixiv.net/users/17100359'">pixivアカウント</a>
+		<a class="border_slide_btn" onclick="location.href='https://www.pixiv.net/users/17100359'">支部アカウント</a>
 	</div>
 
     <div style="text-align:center; margin-top:30px;">
@@ -193,10 +288,85 @@
 		<a class="border_slide_btn r_link" onclick="location.href='https://qiita.com/iNaoki04/items/5d420440cf3d89f54f82'">This site is created with reference to the links.</a>
 	</div>
 
+  <!-- 🍪バナー -->
+  <div id="gtm-notice" class="gtm-notice" role="region" aria-label="GTMの利用についての注意" aria-live="polite" hidden>
+    <div class="gtm-notice__icon" aria-hidden="true">GTM</div>
+    <div class="gtm-notice__body">
+      <div class="gtm-notice__text">このウェブページでは、アクセス解析や機能改善のために Google タグマネージャー（GTM）を使用しています。</div>
+    </div>
+
+    <button class="gtm-notice__close" id="gtm-close" aria-label="閉じる">×</button>
+  </div>
+
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
 <script>
+
+  (function(){
+      // --- 設定 ---
+      const STORAGE_KEY = 'gtm_notice_dismissed_at';
+      const DISMISS_DAYS = 30; // 閉じたら何日間再表示しないか（0 にすると永続）
+
+      const notice = document.getElementById('gtm-notice');
+      const btnClose = document.getElementById('gtm-close');
+      const btnHideForNow = document.getElementById('gtm-hide-for-now');
+      const btnLearnMore = document.getElementById('gtm-learn-more');
+      const privacyLink = document.getElementById('gtm-privacy-link');
+
+      // 表示判定
+      function shouldShow(){
+        try{
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if(!raw) return true;
+          const ts = Number(raw);
+          if(!ts) return true;
+          if(DISMISS_DAYS <= 0) return false; // 永続的に非表示にしたい場合
+          const ms = DISMISS_DAYS * 24 * 60 * 60 * 1000;
+          return (Date.now() - ts) > ms;
+        }catch(e){
+          // localStorage が使えない場合は常に表示
+          return true;
+        }
+      }
+
+      function dismiss(){
+        try{ localStorage.setItem(STORAGE_KEY, String(Date.now())); }catch(e){}
+        hide();
+      }
+
+      function hide(){
+        notice.classList.remove('show');
+        // 完全にDOMから消すのではなく、hidden 属性でスクリーンリーダにも伝える
+        setTimeout(()=> notice.setAttribute('hidden',''), 300);
+      }
+
+      function show(){
+        notice.removeAttribute('hidden');
+        // 小さいタイミング差で class を付けてアニメーション
+        requestAnimationFrame(()=> notice.classList.add('show'));
+      }
+
+      // イベント
+      btnClose.addEventListener('click', function(){ dismiss(); });
+
+      // キーボードアクセス用：Esc で閉じる
+      notice.addEventListener('keydown', function(ev){ if(ev.key === 'Escape') dismiss(); });
+
+      // 初回判定
+      if(shouldShow()){
+        // DOMロード直後に見せたいので少し遅らせる（不意なフラッシュを防ぐ）
+        window.addEventListener('load', ()=> setTimeout(show, 300));
+      }
+
+      // アクセシビリティ: フォーカスをcloseに当てると戻るように
+      btnClose.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); dismiss(); } });
+
+      // --- 追加メモ（開発者向け） ---
+      // localStorage の値をクリアすると再表示されます:
+      // localStorage.removeItem(STORAGE_KEY);
+
+    })();
 
   // 色を選択したら（今回はナシで）
   /*const button = document.getElementById('color_button');
