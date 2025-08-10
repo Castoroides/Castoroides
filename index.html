@@ -387,7 +387,7 @@
   let now_col2;
   let next_col_list = [];
   let c_idx_1, c_idx_2;
-  let interval = 20
+  let interval = 300
   let r_switch = 0
   let client_X, client_y;
   let effects = [];
@@ -473,9 +473,10 @@
 
     // 花火を打ち上げる間隔を調整
     if (width/height < 1){
-    	interval = 120
+    	interval = 500;
     }
     if (0 === frameCount % interval) {// === 厳密等価演算子：文字列が数値に変換されない、frameCount：表示されてきたフレーム数
+      //console.log("いんたーばる！");
       // 打ち上がるスピード
       let speed = random(10, 30);
       fireworks.push(new FireWork(random(width), height, 0, speed, 0.98));
