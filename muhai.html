@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>仮ページ（8/17用）</title>
+
+<!-- スタイル -->
+<style>
+    body {
+        margin: 0;
+        font-family: 'Helvetica Neue', sans-serif;
+        background-color: #f0faff;
+        position: relative;
+        overflow-x: hidden;
+    }
+    header {
+        text-align: center;
+        padding: 40px 20px 20px;
+        position: relative;
+        z-index: 2;
+        color: #004d80;
+    }
+    .image-container {
+        max-width: 400px;
+        margin: 0 auto;
+        aspect-ratio: 1 / 1.4;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        z-index: 2;
+        position: relative;
+    }
+    .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .caption {
+        text-align: center;
+        padding: 15px;
+        color: #333;
+        z-index: 2;
+        position: relative;
+    }
+    .link-button {
+        display: block;
+        width: 200px;
+        margin: 20px auto 40px;
+        padding: 12px 0;
+        background: #00bfff;
+        color: #fff;
+        text-align: center;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: transform 0.2s ease;
+        z-index: 2;
+        position: relative;
+    }
+    .link-button:hover {
+        transform: translateY(-3px);
+    }
+    /* 波を背景として配置 */
+    .wave-bg {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 200px;
+        z-index: 0;
+    }
+</style>
+</head>
+<body>
+
+<!-- GTMダミー -->
+<!-- Google Tag Manager -->
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');
+</script>
+<!-- End Google Tag Manager -->
+
+<header>
+    <h1>仮ページ（8/17用）</h1>
+</header>
+
+<div class="image-container">
+    <img src="sample.jpg" alt="画像タイトル">
+</div>
+
+<div class="caption">
+    ここにキャプションが入ります。夏らしい爽やかなイメージ。
+</div>
+
+<a href="https://twitter.com/" class="link-button" target="_blank">SNSを見る</a>
+
+<!-- 波の背景 -->
+<svg class="wave-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <path fill="#00bfff" fill-opacity="1"></path>
+</svg>
+
+<!-- jQuery & wavify -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://rawcdn.githack.com/peacepostman/wavify/master/wavify.js"></script>
+<script src="https://rawcdn.githack.com/peacepostman/wavify/master/jquery.wavify.js"></script>
+
+<script>
+    // 波アニメーションを初期化
+    $('.wave-bg path').wavify({
+        height: 80,
+        bones: 5,
+        amplitude: 40,
+        color: '#00bfff',
+        speed: 0.15
+    });
+</script>
+
+</body>
+</html>
