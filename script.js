@@ -10,7 +10,7 @@ document.querySelectorAll(".link").forEach(link => {
   });
 });
 
-// Form submit tracking
+/*// Form submit tracking
 const form = document.getElementById("message-form");
 
 form.addEventListener("submit", () => {
@@ -19,7 +19,7 @@ form.addEventListener("submit", () => {
     event: "form_submit",
     form_name: "message_form"
   });
-});
+});*/
 
 const onClickSubmit = () => {
   // 任意の処理をしてからsubmitする
