@@ -6,7 +6,8 @@
 body {
   margin: 0;
   /*background: linear-gradient(180deg, #fff0f5, #f7f7ff);*/
-  background: linear-gradient(180deg, #f4d2da, #e2edea);
+  /*background: linear-gradient(180deg, #f4d2da, #e2edea);*/
+  background: #ECD568;
   color: #333;
 }
 
@@ -96,7 +97,7 @@ textarea::placeholder {
   border-radius: 999px;
   /*background: #ffb6c1;
   color: #333;*/
-  background: #6ec4b2;
+  background: #009986;
   color: #fff;
   font-weight: 600;
   font-size: 0.95rem;
