@@ -22,7 +22,13 @@ form.addEventListener("submit", () => {
 });*/
 
 const onClickSubmit = () => {
-  // 任意の処理をしてからsubmitする
+  // 入力check
+  const message = document.getElementById('message').value.trim();
+  if (message === '') {
+    e.preventDefault(); // 送信を止める
+    alert('空白です');
+  }
+  
   document.qform.submit();
   //$("#form").submit();
 }
