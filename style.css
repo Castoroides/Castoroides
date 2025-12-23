@@ -7,7 +7,7 @@ body {
   margin: 0;
   /*background: linear-gradient(180deg, #fff0f5, #f7f7ff);*/
   /*background: linear-gradient(180deg, #f4d2da, #e2edea);*/
-  background: #ECD568;
+  background: #e19b18;
   color: #333;
 }
 
@@ -29,7 +29,7 @@ body {
 .name {
   font-size: 1.5rem;
   margin: 0;
-  color: #009986;
+  color: #333;
 }
 
 .bio {
@@ -42,7 +42,7 @@ body {
 .links {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 20px;
   width: 70%;
   margin: 0 auto;
 }
@@ -50,7 +50,7 @@ body {
 .link {
   display: block;
   padding: 14px;
-  background: #b0dad5;
+  background: #c3431c;
   border-radius: 999px;
   text-decoration: none;
   color: #fff;
