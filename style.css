@@ -103,10 +103,10 @@ textarea::placeholder {
   width: 100%;
   padding: 14px;
   border: none;
-  border-radius: 999px;
+  border-radius: 10px;
   /*background: #ffb6c1;
   color: #333;*/
-  background: #d25c38;
+  background: #12b5f5;
   color: #fff;
   font-weight: 600;
   font-size: 0.95rem;
