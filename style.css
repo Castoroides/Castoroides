@@ -6,7 +6,7 @@
 body {
   margin: 0;
   /*background: linear-gradient(180deg, #fff0f5, #f7f7ff);*/
-  background: linear-gradient(180deg, #e3b4be, #cae8df);
+  background: linear-gradient(180deg, #f4d2da, #e2edea);
   color: #333;
 }
 
@@ -94,8 +94,10 @@ textarea::placeholder {
   padding: 14px;
   border: none;
   border-radius: 999px;
-  background: #ffb6c1;
-  color: #333;
+  /*background: #ffb6c1;
+  color: #333;*/
+  background: #6ec4b2;
+  color: #fff;
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
@@ -103,7 +105,7 @@ textarea::placeholder {
 }
 
 .submitBtn:hover {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 footer {
