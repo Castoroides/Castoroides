@@ -25,7 +25,7 @@ const onClickSubmit = () => {
   // 入力check
   const message = document.getElementById('message').value.trim();
   if (message === '') {
-    e.preventDefault(); // 送信を止める
+    onClickSubmit.preventDefault(); // 送信を止める
     alert('空白です');
   }
   
