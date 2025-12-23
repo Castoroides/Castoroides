@@ -54,7 +54,8 @@ body {
   border-radius: 999px;
   text-decoration: none;
   color: #fff;
-  font-weight: 600;
+  font-weight: 400;
+  font-size: 0.95rem;
   box-shadow: 0 6px 16px rgba(0,0,0,0.08);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
