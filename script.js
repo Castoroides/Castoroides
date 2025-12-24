@@ -73,9 +73,7 @@ window.handleData = function (data) {
     list.appendChild(card);
   });
 };
-</script>
 
-<script>
 /**
  * JSONP 読み込み
  * ★ handleData 定義「後」
@@ -93,4 +91,4 @@ window.handleData = function (data) {
 
   document.body.appendChild(script);
 })();
-</script>
+
