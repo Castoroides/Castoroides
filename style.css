@@ -159,3 +159,34 @@ footer {
 .cookie-notice button:hover {
   color: #333;
 }
+
+/* Responces */
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.row {
+  margin-bottom: 10px;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.value {
+  font-size: 14px;
+  color: #222;
+  white-space: pre-wrap;
+}
