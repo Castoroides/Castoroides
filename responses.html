@@ -57,47 +57,47 @@
  * GAS から返ってきたデータをカードとして描画
  */
 function handleData(data) {
-  const list = document.getElementById("list");
-  list.innerHTML = "";
+      const list = document.getElementById("list");
+      list.innerHTML = "";
 
-  if (!data || data.length === 0) {
-    list.textContent = "表示するデータがありません";
-    return;
-  }
+      if (!data || data.length === 0) {
+        list.textContent = "表示するデータがありません";
+        return;
+      }
 
-  data.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "card";
+      data.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "card";
 
-    card.innerHTML = `
-      <div class="row">
-        <span class="label">送信日</span>
-        <span class="value">${item["送信日"] || ""}</span>
-      </div>
-      <div class="row">
-        <span class="label">メッセージ</span>
-        <span class="value">${item["メッセージ"] || ""}</span>
-      </div>
-      <div class="row">
-        <span class="label">回答</span>
-        <span class="value">${item["回答"] || "（未回答）"}</span>
-      </div>
-    `;
+        card.innerHTML = `
+          <!-- 右上の日付 -->
+          <div class="card-date">${item["送信日"] || ""}</div>
 
-    list.appendChild(card);
-  });
-}
+          <div class="row">
+            <span class="label">メッセージ</span>
+            <span class="value">${item["メッセージ"] || ""}</span>
+          </div>
 
-/**
- * JSONP 読み込み
- * ※ fetch は使わない（CORS回避）
- */
-const script = document.createElement("script");
-script.src =
-  "https://script.google.com/macros/s/AKfycbwjB9oQE9ZaGjPNygmIgZVPKOJVxZyVeICSVgmMNZN53PQM5JmgFFhWixjWJ4fIJXKB/exec"
-  + "?callback=handleData";
+          <div class="row">
+            <span class="label">回答</span>
+            <span class="value">${item["回答"] || "（未回答）"}</span>
+          </div>
+        `;
 
-document.body.appendChild(script);
+        list.appendChild(card);
+      });
+    }
+
+    /**
+     * JSONP 読み込み
+     * ※ fetch は使わない（CORS回避）
+     */
+    const script = document.createElement("script");
+    script.src =
+      "https://script.google.com/macros/s/AKfycbwjB9oQE9ZaGjPNygmIgZVPKOJVxZyVeICSVgmMNZN53PQM5JmgFFhWixjWJ4fIJXKB/exec"
+      + "?callback=handleData";
+
+    document.body.appendChild(script);
 </script>
 
 </body>
