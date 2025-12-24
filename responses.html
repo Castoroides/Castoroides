@@ -52,18 +52,17 @@
 
   <!-- Acquiring Q&A data -->
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbxl9893Y-dZNCVNJYSLlCrlJnf1W8WUHWz5y2jnqLW8sdzT6359BTtvPEzFvDHIzcc0/exec";
+function handleData(data) {
+  document.getElementById("list").innerHTML =
+    data.map(t => `<p>${t}</p>`).join("");
+}
 
-    fetch(API_URL)
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("list").innerHTML =
-          data.map(t => `<p>${t}</p>`).join("");
-      })
-      .catch(() => {
-        document.getElementById("list").textContent =
-          "読み込みに失敗しました";
-      });
-  </script>
+const script = document.createElement("script");
+script.src =
+  "https://script.google.com/macros/s/AKfycbyXOxLKlPvmM1Td1hqgK4PMMgEisrimALql2cQQwZJDQfnMj1dUZpA0UmC_YEuqKjfF/exec"
+  + "?callback=handleData";
+
+document.body.appendChild(script);
+</script>
 </body>
 </html>
