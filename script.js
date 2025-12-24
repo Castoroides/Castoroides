@@ -37,7 +37,7 @@ cookieClose.addEventListener("click", () => {
 });
 
 // -------- Q&A読み込み --------
-fetch(""https://script.google.com/macros/s/AKfycbzOOlRFJfIv32aeWsGY3DztW4ScwPX7a4mIY9wwCRdLN87EcqPJCwtS1b5k9t9QyL7G/exec"")
+fetch("https://script.google.com/macros/s/AKfycbzOOlRFJfIv32aeWsGY3DztW4ScwPX7a4mIY9wwCRdLN87EcqPJCwtS1b5k9t9QyL7G/exec")
   .then(res => {
     if (!res.ok) throw new Error("network error");
     return res.json();
