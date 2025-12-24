@@ -37,7 +37,13 @@ cookieClose.addEventListener("click", () => {
 });
 
 // -------- Q&A読み込み --------
+/**
+ * JSONP コールバック
+ * ★ 必ず先に定義する
+ */
 window.handleData = function (data) {
+  console.log("handleData called:", data);
+
   const list = document.getElementById("list");
   list.innerHTML = "";
 
@@ -67,3 +73,24 @@ window.handleData = function (data) {
     list.appendChild(card);
   });
 };
+</script>
+
+<script>
+/**
+ * JSONP 読み込み
+ * ★ handleData 定義「後」
+ */
+(function () {
+  const script = document.createElement("script");
+  script.src =
+    "https://script.google.com/macros/s/AKfycbzOOlRFJfIv32aeWsGY3DztW4ScwPX7a4mIY9wwCRdLN87EcqPJCwtS1b5k9t9QyL7G/exec"
+    + "?callback=handleData";
+
+  script.onerror = () => {
+    console.error("GAS JSONP load failed");
+    document.getElementById("list").textContent = "データの読み込みに失敗しました";
+  };
+
+  document.body.appendChild(script);
+})();
+</script>
