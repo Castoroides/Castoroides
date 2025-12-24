@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UKY's | Responses</title>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TPKXSNK3');</script>
+  <!-- End Google Tag Manager -->
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TPKXSNK3"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <main class="container">
+
+    <img src="https://pbs.twimg.com/profile_images/1990063014457053185/J0CJwbSv_400x400.jpg" alt="icon" class="avatar" />
+
+    <h1 class="name">ゆけわいの回答</h1>
+    <p class="bio">短い説明文を書きます</p>
+
+    <!-- responses -->
+    <div id="list">読み込み中...</div>
+      
+    </div>
+
+    <!-- Form -->
+    <!-- <section class="form-section">
+      <form id="message-form" name="qform" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeAh3PkdADlFIdCWVgCcHmDSSe239NOmleDR-4Vj3EsfSynGg/formResponse">
+        <label for="message" class="form-label">匿名でゆけわいにメッセージを送信できます</label>
+        <textarea
+          id="message"
+          name="entry.1612645408"
+          method="post"
+          target="hidden-iframe"
+          placeholder="お気軽にどうぞ"
+          rows="5"
+        ></textarea>
+        <!--<button type="submit" class="submit-btn">送信</button>-->
+        <input class="submitBtn" type="button" value="送信" onclick="onClickSubmit()">
+      </form>
+    </section> -->
+
+    <footer>
+      <small>© 2025 castoroides.uky</small>
+    </footer>
+
+  </main>
+
+  <!-- Cookie Notice -->
+  <div id="cookie-notice" class="cookie-notice">
+    <span>このサイトではクッキーを使用しています。</span>
+    <button id="cookie-close" aria-label="閉じる">×</button>
+  </div>
+
+  <script src="script.js"></script>
+
+  <!-- Acquiring Q&A data -->
+  <script>
+    const API_URL = "https://script.google.com/macros/s/1FMRhFKQ22Jt8O_m7FIZW7_dzrLl3Nn0P2o2m1qMA9gwTgvl7W-3-TeRx/exec";
+
+    fetch(API_URL)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("list").innerHTML =
+          data.map(t => `<p>${t}</p>`).join("");
+      })
+      .catch(() => {
+        document.getElementById("list").textContent =
+          "読み込みに失敗しました";
+      });
+  </script>
+</body>
+</html>
