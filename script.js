@@ -72,7 +72,7 @@ function handleData(data) {
 // JSONP読み込み ※ fetch は使わない（CORS回避）
 const script = document.createElement("script");
 script.src =
-  "https://script.google.com/macros/s/AKfycbwjB9oQE9ZaGjPNygmIgZVPKOJVxZyVeICSVgmMNZN53PQM5JmgFFhWixjWJ4fIJXKB/exec"
+  "https://script.google.com/macros/s/AKfycbzOOlRFJfIv32aeWsGY3DztW4ScwPX7a4mIY9wwCRdLN87EcqPJCwtS1b5k9t9QyL7G/exec"
   + "?callback=handleData";
 
 document.body.appendChild(script);
