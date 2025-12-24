@@ -1,4 +1,4 @@
-// Link click tracking
+// -------- Link click tracking --------
 document.querySelectorAll(".link").forEach(link => {
   link.addEventListener("click", () => {
     window.dataLayer = window.dataLayer || [];
@@ -10,17 +10,7 @@ document.querySelectorAll(".link").forEach(link => {
   });
 });
 
-/*// Form submit tracking
-const form = document.getElementById("message-form");
-
-form.addEventListener("submit", () => {
-  window.dataLayer = window.dataLayer || [];
-  dataLayer.push({
-    event: "form_submit",
-    form_name: "message_form"
-  });
-});*/
-
+// -------- Form submit tracking --------
 const onClickSubmit = () => {
   // 入力check
   const message = document.getElementById('message').value.trim();
@@ -33,7 +23,7 @@ const onClickSubmit = () => {
   //$("#form").submit();
 }
 
-// Cookie notice control
+// -------- Cookie notice control --------
 const cookieNotice = document.getElementById("cookie-notice");
 const cookieClose = document.getElementById("cookie-close");
 
@@ -45,3 +35,44 @@ cookieClose.addEventListener("click", () => {
   cookieNotice.style.display = "none";
   localStorage.setItem("cookieNoticeClosed", "true");
 });
+
+// -------- Q&A読み込み --------
+function handleData(data) {
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+
+  if (!data || data.length === 0) {
+    list.textContent = "表示するデータがありません";
+    return;
+  }
+
+  data.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <!-- 右上の日付 -->
+      <div class="card-date">${item["送信日"] || ""}</div>
+
+      <div class="row">
+        <span class="label">メッセージ</span>
+        <span class="value">${item["メッセージ"] || ""}</span>
+      </div>
+
+      <div class="row">
+        <span class="label">回答</span>
+        <span class="value">${item["回答"] || "（未回答）"}</span>
+      </div>
+    `;
+
+    list.appendChild(card);
+  });
+}
+
+// JSONP読み込み ※ fetch は使わない（CORS回避）
+const script = document.createElement("script");
+script.src =
+  "https://script.google.com/macros/s/AKfycbwjB9oQE9ZaGjPNygmIgZVPKOJVxZyVeICSVgmMNZN53PQM5JmgFFhWixjWJ4fIJXKB/exec"
+  + "?callback=handleData";
+
+document.body.appendChild(script);
