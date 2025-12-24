@@ -37,7 +37,7 @@ cookieClose.addEventListener("click", () => {
 });
 
 // -------- Q&A読み込み --------
-function handleData(data) {
+window.handleData = function (data) {
   const list = document.getElementById("list");
   list.innerHTML = "";
 
@@ -51,7 +51,6 @@ function handleData(data) {
     card.className = "card";
 
     card.innerHTML = `
-      <!-- 右上の日付 -->
       <div class="card-date">${item["送信日"] || ""}</div>
 
       <div class="row">
@@ -67,12 +66,4 @@ function handleData(data) {
 
     list.appendChild(card);
   });
-}
-
-// JSONP読み込み ※ fetch は使わない（CORS回避）
-const script = document.createElement("script");
-script.src =
-  "https://script.google.com/macros/s/AKfycbzOOlRFJfIv32aeWsGY3DztW4ScwPX7a4mIY9wwCRdLN87EcqPJCwtS1b5k9t9QyL7G/exec"
-  + "?callback=handleData";
-
-document.body.appendChild(script);
+};
