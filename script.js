@@ -37,58 +37,45 @@ cookieClose.addEventListener("click", () => {
 });
 
 // -------- Q&A読み込み --------
-/**
- * JSONP コールバック
- * ★ 必ず先に定義する
- */
-window.handleData = function (data) {
-  console.log("handleData called:", data);
+fetch(""https://script.google.com/macros/s/AKfycbzOOlRFJfIv32aeWsGY3DztW4ScwPX7a4mIY9wwCRdLN87EcqPJCwtS1b5k9t9QyL7G/exec"")
+  .then(res => {
+    if (!res.ok) throw new Error("network error");
+    return res.json();
+  })
+  .then(data => {
+    console.log("fetched:", data);
 
-  const list = document.getElementById("list");
-  list.innerHTML = "";
+    const list = document.getElementById("list");
+    list.innerHTML = "";
 
-  if (!data || data.length === 0) {
-    list.textContent = "表示するデータがありません";
-    return;
-  }
+    if (!data || data.length === 0) {
+      list.textContent = "表示するデータがありません";
+      return;
+    }
 
-  data.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "card";
+    data.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "card";
 
-    card.innerHTML = `
-      <div class="card-date">${item["送信日"] || ""}</div>
+      card.innerHTML = `
+        <div class="card-date">${item["送信日"] || ""}</div>
 
-      <div class="row">
-        <span class="label">メッセージ</span>
-        <span class="value">${item["メッセージ"] || ""}</span>
-      </div>
+        <div class="row">
+          <span class="label">メッセージ</span>
+          <span class="value">${item["メッセージ"] || ""}</span>
+        </div>
 
-      <div class="row">
-        <span class="label">回答</span>
-        <span class="value">${item["回答"] || "（未回答）"}</span>
-      </div>
-    `;
+        <div class="row">
+          <span class="label">回答</span>
+          <span class="value">${item["回答"] || "（未回答）"}</span>
+        </div>
+      `;
 
-    list.appendChild(card);
+      list.appendChild(card);
+    });
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById("list").textContent =
+      "データの読み込みに失敗しました";
   });
-};
-
-/**
- * JSONP 読み込み
- * ★ handleData 定義「後」
- */
-(function () {
-  const script = document.createElement("script");
-  script.src =
-    "https://script.google.com/macros/s/AKfycbzOOlRFJfIv32aeWsGY3DztW4ScwPX7a4mIY9wwCRdLN87EcqPJCwtS1b5k9t9QyL7G/exec"
-    + "?callback=handleData";
-
-  script.onerror = () => {
-    console.error("GAS JSONP load failed");
-    document.getElementById("list").textContent = "データの読み込みに失敗しました";
-  };
-
-  document.body.appendChild(script);
-})();
-
