@@ -34,7 +34,7 @@
     <p class="bio">短い説明文を書きます</p>
 
     <!-- responses -->
-    <div id="list">読み込み中.....</div>
+    <div id="list" class="card-list">読み込み中...</div>
 
     <footer>
       <small>© 2025 castoroides.uky</small>
@@ -48,21 +48,54 @@
     <button id="cookie-close" aria-label="閉じる">×</button>
   </div>
 
-  <script src="script.js"></script>
-
-  <!-- Acquiring Q&A data -->
-  <script>
+<script>
+/**
+ * JSONP コールバック
+ * GAS から返ってきたデータをカードとして描画
+ */
 function handleData(data) {
-  document.getElementById("list").innerHTML =
-    data.map(t => `<p>${t}</p>`).join("");
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+
+  if (!data || data.length === 0) {
+    list.textContent = "表示するデータがありません";
+    return;
+  }
+
+  data.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <div class="row">
+        <span class="label">送信日</span>
+        <span class="value">${item["送信日"] || ""}</span>
+      </div>
+      <div class="row">
+        <span class="label">メッセージ</span>
+        <span class="value">${item["メッセージ"] || ""}</span>
+      </div>
+      <div class="row">
+        <span class="label">回答</span>
+        <span class="value">${item["回答"] || "（未回答）"}</span>
+      </div>
+    `;
+
+    list.appendChild(card);
+  });
 }
 
+/**
+ * JSONP 読み込み
+ * ※ fetch は使わない（CORS回避）
+ */
 const script = document.createElement("script");
 script.src =
-  "https://script.google.com/macros/s/AKfycbyXOxLKlPvmM1Td1hqgK4PMMgEisrimALql2cQQwZJDQfnMj1dUZpA0UmC_YEuqKjfF/exec"
+  "https://script.google.com/macros/s/AKfycbwjB9oQE9ZaGjPNygmIgZVPKOJVxZyVeICSVgmMNZN53PQM5JmgFFhWixjWJ4fIJXKB/exec"
   + "?callback=handleData";
 
 document.body.appendChild(script);
 </script>
+
 </body>
 </html>
