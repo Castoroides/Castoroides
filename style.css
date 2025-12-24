@@ -7,7 +7,6 @@ body {
   margin: 0;
   /*background: linear-gradient(180deg, #fff0f5, #f7f7ff);*/
   background: linear-gradient(180deg, #b0e2e6ff, #c2f7e2ff);
-  /*background: #e8dbac;*/
   color: #333;
 }
 
@@ -161,33 +160,51 @@ footer {
 }
 
 /* Responces */
-.card-list {
+#list.card-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-.card {
+#list.card-list .card {
+  position: relative; /* 日付配置用 */
   background: #fff;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  text-align: left;
+  border-radius: 16px;
+  padding: 24px 22px 20px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  text-align: left; /* ★ 中央寄せ対策 */
 }
 
-.row {
-  margin-bottom: 10px;
+#list.card-list .card-date {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 12px;
+  color: #888;
+  letter-spacing: 0.02em;
 }
 
-.label {
+#list.card-list .row {
+  margin-bottom: 14px;
+}
+
+#list.card-list .row:last-child {
+  margin-bottom: 0;
+}
+
+#list.card-list .label {
   display: block;
   font-size: 12px;
   color: #666;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
 }
 
-.value {
+#list.card-list .value {
   font-size: 14px;
-  color: #222;
+  line-height: 1.7;
   white-space: pre-wrap;
+  word-break: break-word;
 }
